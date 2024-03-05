@@ -1,0 +1,29 @@
+import pandas as pd
+import numpy as np
+df = pd.read_csv('bank_marketing.csv')
+df.head(10)
+
+# Checking for missing values in each DataFrame
+missing_values = {
+    "client": client.isnull().sum(),
+    "campaign": campaign.isnull().sum(),
+    "economics": economics.isnull().sum(),
+    "marketing": marketing.isnull().sum(),
+    "df": df.isnull().sum()
+}
+
+# Displaying the missing values for each DataFrame
+for key, value in missing_values.items():
+    print(f"Missing values in {key} DataFrame:\n{value}\n")
+
+# Checking for unique values in object type columns to identify inconsistencies
+object_columns_info = {
+    "client": client.select_dtypes(include=['object']).nunique(),
+    "campaign": campaign.select_dtypes(include=['object']).nunique(),  # Assuming there might be object types
+    "marketing": marketing.select_dtypes(include=['object']).nunique(),
+    "df": df.select_dtypes(include=['object']).nunique()
+}
+
+# Displaying the unique values count for object type columns in each DataFrame
+for key, value in object_columns_info.items():
+    print(f"Unique values in object columns of {key} DataFrame:\n{value}\n")
